@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\OnlineClothStore",
+    "\\OnlineClothStore\\Models"
   ],
+  "SelectedNode": "\\OnlineClothStore\\Models",
   "PreviewInSolutionExplorer": false
 }
