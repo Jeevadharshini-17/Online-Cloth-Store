@@ -13,6 +13,6 @@ namespace OnlineClothStore.Models
         public string VendorEmail { get; set; }
         public string VendorPhone { get; set; }
         public string VendorAddress { get; set; }
-        public string VWalletBalance { get; set; }
+        public float VWalletBalance { get; set; }
     }
 }
