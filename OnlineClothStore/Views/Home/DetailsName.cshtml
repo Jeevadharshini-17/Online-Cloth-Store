@@ -1,16 +1,17 @@
 ﻿@model IEnumerable<OnlineClothStore.Models.Product>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "DetailsName";
 }
 
 <h2>Welcome To The Store!</h2>
 
 
-    @using(Html.BeginForm("DetailsName", "Home", FormMethod.Get))
-            {
-                @Html.TextBox("name")<input type="submit" value="Search"/>
-            }
+@using (Html.BeginForm("DetailsName", "Home", FormMethod.Get))
+{
+    @Html.TextBox("name")
+    <input type="submit" value="Search" />
+}
 
 
 <table class="table">
@@ -58,7 +59,7 @@
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
-                <input type="button"  value="Place Order"/>
+                <input type="button" value="Place Order" />
             </td>
         </tr>
     }
