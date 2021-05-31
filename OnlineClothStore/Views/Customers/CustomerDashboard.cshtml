@@ -1,0 +1,10 @@
+﻿@model OnlineClothStore.Models.Customer
+@{
+    ViewBag.Title = "Dashboard";
+}
+<div>
+@Html.ActionLink("View Profile", "Details", new { id = Model.CustomerId })
+    </div>
+@*@Html.ActionLink("Edit Profile", "Edit", new { id = Model.CustomerId })*@
+
+

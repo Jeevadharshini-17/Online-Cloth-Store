@@ -1,0 +1,63 @@
+﻿@model IEnumerable<OnlineClothStore.Models.Vendor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VWalletBalance)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VWalletBalance)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.VendorId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.VendorId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.VendorId })
+        </td>
+    </tr>
+}
+
+</table>

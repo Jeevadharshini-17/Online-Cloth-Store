@@ -12,7 +12,11 @@ namespace OnlineClothStore
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+        //    routes.MapRoute(
+        //    name: "CustomerProfile",
+        //    url: "Customers/Details/{id}",
+        //    defaults: new { controller = "Customers", action = "Details", id = @"\d+" }
+        //);
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

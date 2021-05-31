@@ -3083,7 +3083,7 @@ select[multiple].input-lg {
   .form-horizontal .control-label {
     padding-top: 7px;
     margin-bottom: 0;
-    text-align: right;
+    text-align: center;
   }
 }
 .form-horizontal .has-feedback .form-control-feedback {
@@ -4063,7 +4063,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
-  text-decoration: none;
+  text-decoration:solid;
   background-color: #eeeeee;
 }
 .nav > li.disabled > a {
@@ -4244,6 +4244,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   min-height: 50px;
   margin-bottom: 20px;
   border: 1px solid transparent;
+  color:aquamarine;
 }
 @media (min-width: 768px) {
   .navbar {
@@ -4348,11 +4349,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-brand {
-  float: left;
-  height: 50px;
-  padding: 15px 15px;
-  font-size: 18px;
-  line-height: 20px;
+    float: left;
+    padding: 15px 15px;
+    font-size: 25px;
+    line-height: 20px;
+    font-family: 'Facebook Letter Faces'
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -4665,22 +4666,24 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #222;
-  border-color: #080808;
+   background-color:cadetblue;
+   border-color: #eeeeee;
 }
 .navbar-inverse .navbar-brand {
-  color: #9d9d9d;
-}
-.navbar-inverse .navbar-brand:hover,
-.navbar-inverse .navbar-brand:focus {
   color: #fff;
-  background-color: transparent;
 }
-.navbar-inverse .navbar-text {
-  color: #9d9d9d;
-}
+    .navbar-inverse .navbar-brand:hover,
+    .navbar-inverse .navbar-brand:focus {
+        color: forestgreen;
+        background-color: transparent;
+    }
+    .navbar-inverse .navbar-text {
+        color: #fff;
+
+    }
 .navbar-inverse .navbar-nav > li > a {
-  color: #9d9d9d;
+  color: #ddd;
+  font-weight:bold;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
@@ -6832,3 +6835,13 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+#signtitle
+{
+    color:brown;
+    text-align:center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#mylogin
+{
+    align-items:center;
+}
