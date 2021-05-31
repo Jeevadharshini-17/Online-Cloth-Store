@@ -15,7 +15,7 @@ namespace OnlineClothStore.Models
         public string ProductName { get; set; }
         public int VendorId { get; set; }
         public int CategoryId { get; set; }
-        public string AdminStatus { get; set; }
+        
 
         public byte[] ProductImage { get; set; }
         public virtual Category Category { get; set; }

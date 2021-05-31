@@ -12,7 +12,7 @@ namespace OnlineClothStore.Models
         {
 
         }
-        public DbSet<Admin> Admin { get; set; }
+       
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Vendor> Vendor { get; set; }
         public DbSet<Inventory> Inventory { get; set; }

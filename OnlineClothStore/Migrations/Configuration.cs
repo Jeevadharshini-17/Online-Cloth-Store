@@ -21,10 +21,7 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
-            var admins = new List<Admin>
-            {
-                new Admin { AdminName="Admin1", AdminPassword="admin@123"}
-            };
+           
             var customers = new List<Customer>
             {
                 new Customer { CustomerName="Jeevadharshini", CustomerEmail="jeeva@gmail.com",CustomerPassword="customer@123",CustomerAddress="Coimbatore",CustomerPhone="1234567890",CustomerWalletBalance=0}
@@ -39,14 +36,14 @@
             };
             var products = new List<Product>
             {
-                new Product { ProductName="Denim Jackets", ProductImage=null,VendorId=1,CategoryId=1,AdminStatus="Approved"}
+                new Product { ProductName="Denim Jackets", ProductImage=null,VendorId=1,CategoryId=1}
             };
             var inventories = new List<Inventory>
             {
                 new Inventory { ProductId=1, ProductQuantity=10,ProductPrice=1000}
             };
             products.ForEach(p => context.Product.Add(p));
-            admins.ForEach(a => context.Admin.Add(a));
+            
             categories.ForEach(ct => context.Category.Add(ct));
             customers.ForEach(c => context.Customer.Add(c));
             vendors.ForEach(v => context.Vendor.Add(v));
