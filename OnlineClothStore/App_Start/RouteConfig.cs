@@ -14,7 +14,7 @@ namespace OnlineClothStore
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
         //    routes.MapRoute(
         //    name: "CustomerProfile",
-        //    url: "Customers/Details/{id}",
+        //   url: "Customers/Details/{id}",
         //    defaults: new { controller = "Customers", action = "Details", id = @"\d+" }
         //);
             routes.MapRoute(

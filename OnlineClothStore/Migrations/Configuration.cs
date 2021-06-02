@@ -5,6 +5,8 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Drawing;
+    using System.IO;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<OnlineClothStore.Models.OnlineClothStoreDBContext>
@@ -31,12 +33,6 @@
                 new Vendor { VendorName="Harinee", VendorEmail="harinee@gmail.com",VendorPassword="vendor@123",VendorAddress="Coimbatore",VendorPhone="1234567891",VWalletBalance=0}
             };
             
-            var products = new List<Product>
-            {
-                new Product { ProductName="Denim Jackets", ProductImage=null,VendorId=1, CategoryName="Womens", ProductPrice = 200, ProductQuantity = 5}
-            };
-           
-            products.ForEach(p => context.Product.Add(p));
 
            
             customers.ForEach(c => context.Customer.Add(c));

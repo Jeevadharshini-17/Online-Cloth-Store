@@ -18,8 +18,6 @@ namespace OnlineClothStore.Models
         public DbSet<Product> Product { get; set; }
         public DbSet<Order> Order { get; set; }
 
-        public DbSet<OrderDetail> OrderDetail { get; set; }
-
 
     }
 }

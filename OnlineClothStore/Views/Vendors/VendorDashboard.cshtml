@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "VendorDashboard";
+}
+<br /><br />
+<h2 id="signtitle"> Hey @User.Identity.Name</h2>
+
+<br />
+<br />
+<br />
+<br />
+<div class="col-md-offset-2 col-md-10">
+    <input type="submit" value="View Profile" onclick="location.href='@Url.Action("Details", "Vendors", new { email = User.Identity.Name })'" class="btn btn-success" />
+</div>
+<br />
+<br />
+<br />
+<br />
+
+<div class="col-md-offset-2 col-md-10">
+    <input type="submit" value="Update Products" onclick="location.href='@Url.Action("ProductsByVendorId", "Products", new { email = User.Identity.Name })'" class="btn btn-success" />
+</div>
+<br />
+<br />
+<br />
+<br />
+<div class="col-md-offset-2 col-md-10">
+    <input type="submit" value="View All Orders" onclick="location.href='@Url.Action("OrdersByVendorId", "Orders", new { email = User.Identity.Name })'" class="btn btn-success" />
+</div>
+<br />
+<br />
+<br />
+<br />
+<div class="col-md-offset-2 col-md-10">
+    <input type="submit" value="Accept or Deny Orders" onclick="location.href='@Url.Action("VendorPendingOrders", "Orders", new { email = User.Identity.Name })'" class="btn btn-success" />
+</div>
+<br />
+<br />
+
+
+
+
+
+
+
+
+
+
+
+
+

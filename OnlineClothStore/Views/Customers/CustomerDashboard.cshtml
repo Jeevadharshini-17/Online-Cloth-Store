@@ -2,9 +2,28 @@
 @{
     ViewBag.Title = "Dashboard";
 }
-<div>
-@Html.ActionLink("View Profile", "Details", new { id = Model.CustomerId })
-    </div>
-@*@Html.ActionLink("Edit Profile", "Edit", new { id = Model.CustomerId })*@
+<br /><br />
+<h2 id="signtitle"> Hey @User.Identity.Name</h2>
+<br /><br />
+      <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+              <input type="submit" value="View Profile" onclick="location.href='@Url.Action("Details", "Customers", new { email = User.Identity.Name })'" class="btn btn-success" />
+          </div>
+          <br /> <br />
+          <br /><br />
+          <div class="col-md-offset-2 col-md-10">
+              <input type="submit" value="Recharge Wallet" onclick="location.href='@Url.Action("RechargeWallet", "Customers", new { email = User.Identity.Name })'" class="btn btn-success" />
+          </div>
+          <br /> <br />
+          <br /><br />
+          <div class="col-md-offset-2 col-md-10">
+              <input type="submit" value="Place Order" onclick="location.href='@Url.Action("Index", "Products")'" class="btn btn-success" />
+          </div>
+          <br /><br />
+          <br /><br />
+          <div class="col-md-offset-2 col-md-10">
+              <input type="submit" value="View Order History" onclick="location.href='@Url.Action("CustomerHistory", "Orders", new { email = User.Identity.Name })'" class="btn btn-success" />
+          </div>
+      </div>
 
 

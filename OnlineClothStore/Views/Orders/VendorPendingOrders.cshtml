@@ -1,0 +1,58 @@
+﻿@model IEnumerable<OnlineClothStore.Models.Order>
+
+@{
+    ViewBag.Title = "VendorPendingOrders";
+}
+<br /><br /><br />
+<h4 id="signtitle">Orders to be Reviewed</h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderTotal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderTotal)
+        </td>
+        <td>
+            @Html.ActionLink("Accept", "Edit", new { id=item.OrderId }) |
+            @Html.ActionLink("Deny", "EditForDeny", new { id=item.OrderId })
+        </td>
+    </tr>
+}
+
+</table>

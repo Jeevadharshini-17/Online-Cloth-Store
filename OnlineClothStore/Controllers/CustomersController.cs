@@ -6,8 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+
 using OnlineClothStore.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace OnlineClothStore.Controllers
 {
@@ -15,8 +18,6 @@ namespace OnlineClothStore.Controllers
     {
         private OnlineClothStoreDBContext db = new OnlineClothStoreDBContext();
         private ApplicationDbContext db1 = new ApplicationDbContext();
-
-
         // GET: Customers
         public ActionResult Index()
         {
@@ -24,13 +25,13 @@ namespace OnlineClothStore.Controllers
         }
 
         // GET: Customers/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string email)
         {
-            if (id == null)
+            if (email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customer.Find(id);
+            Customer customer = (Customer)db.Customer.SingleOrDefault(c => c.CustomerEmail==email);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -60,18 +61,11 @@ namespace OnlineClothStore.Controllers
                     var manager = new UserManager<ApplicationUser>(store);
                     var user = new ApplicationUser { UserName = customer.CustomerEmail, Email = customer.CustomerEmail };
                     manager.Create(user, customer.CustomerPassword);
-                    var tempCustomer = TempData["customer"] as Customer;
-                    tempCustomer.CustomerId = customer.CustomerId;
-                    tempCustomer.CustomerName = customer.CustomerName;
-                    tempCustomer.CustomerAddress = customer.CustomerAddress;
-                    tempCustomer.CustomerEmail = customer.CustomerEmail;
-                    tempCustomer.CustomerPassword = customer.CustomerPassword;
-                    tempCustomer.CustomerPhone = customer.CustomerPhone;
-                    tempCustomer.CustomerWalletBalance = customer.CustomerWalletBalance;
+                    
 
                 }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login","Account");
             }
 
             return View(customer);
@@ -103,10 +97,36 @@ namespace OnlineClothStore.Controllers
             {
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("CustomerDashboard");
             }
             return View(customer);
         }
+        public ActionResult RechargeWallet(string email)
+        {
+            if (email == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = (Customer)db.Customer.SingleOrDefault(c => c.CustomerEmail == email);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RechargeWallet([Bind(Include = "CustomerId,CustomerName,CustomerEmail,CustomerPassword,CustomerAddress,CustomerPhone,CustomerWalletBalance")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("CustomerDashboard");
+            }
+            return View(customer);
+        }
+
 
         // GET: Customers/Delete/5
         public ActionResult Delete(int? id)

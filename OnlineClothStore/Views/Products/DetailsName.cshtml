@@ -1,0 +1,72 @@
+﻿@model IEnumerable<OnlineClothStore.Models.Product>
+
+
+
+@{ ViewBag.Title = "Index"; }
+
+<body>
+
+    <h2 id="signtitle">Welcome To Fashion Hub!</h2>
+
+
+    <hr />
+
+    @using (Html.BeginForm("DetailsName", "Products", FormMethod.Get))
+    {
+@Html.TextBox("name")<tr />
+                <input id="searchbtn" type="submit" value="Search Products" class="btn btn-success" />}
+
+
+    <hr />
+
+    <table class="table">
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Available Quantity
+            </th>
+            <th>
+                Product Cost
+            </th>
+            <th>
+                Preview
+            </th>
+            <th>
+                Category
+            </th>
+            <th></th>
+        </tr>
+
+
+
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductQuantity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductPrice)
+    </td>
+    <td>
+        <img src="@Url.Content(item.ProductImage)" alt="Image not found" width="200" height="200" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CategoryName)
+    </td>
+    <td>
+
+        <input type="submit" value="Place Order" onclick="location.href='@Html.Raw(@Url.Action("UpdateOrderDetails", "Products",item))'" class="btn btn-danger" />
+        @*@Html.ActionLink("Place Order", actionName: "UpdateOrderDetails", controllerName: "Products", routeValues: new { email = User.Identity.Name, p = item }, htmlAttributes: null)*@
+    </td>
+</tr>}
+
+
+
+    </table>
+</body>

@@ -1,0 +1,72 @@
+﻿@model OnlineClothStore.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3>Order Details</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Customer ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>
+
+        <dt>
+            Vendor ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorId)
+        </dd>
+
+        <dt>
+            Product ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductId)
+        </dd>
+
+        <dt>
+           Quantity Ordered
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductQuantity)
+        </dd>
+
+        <dt>
+            Order Status
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderStatus)
+        </dd>
+
+        <dt>
+            Date Of Order
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            Order Amount
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderTotal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to Dashboard", "CustomerDashboard","Customers")
+</p>

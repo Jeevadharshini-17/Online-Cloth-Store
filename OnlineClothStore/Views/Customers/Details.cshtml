@@ -4,54 +4,53 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 id="signtitle">Hey @Model.CustomerName</h2>
 
 <div>
-    <h4>Customer</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerName)
+            Name
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.CustomerName)
         </dd>
-
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerEmail)
+            Email
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.CustomerEmail)
         </dd>
-
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerPassword)
+            Password
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.CustomerPassword)
         </dd>
-
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerAddress)
+            Address
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.CustomerAddress)
         </dd>
-
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerPhone)
+           Mobile Number
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.CustomerPhone)
         </dd>
-
+        <br>
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerWalletBalance)
+            Wallet Balance
         </dt>
 
         <dd>
@@ -61,6 +60,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerId }) |
-    @Html.ActionLink("Back to List", "Index")
+
+    @Html.ActionLink("Edit Profile", "Edit", new { id = Model.CustomerId })
+    <span> | </span>
+    @Html.ActionLink("Back to Dashboard", "CustomerDashboard")
 </p>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.VisualBasic.ApplicationServices;
 using OnlineClothStore.Models;
 
 namespace OnlineClothStore.Controllers
@@ -19,6 +20,51 @@ namespace OnlineClothStore.Controllers
         public ActionResult Index()
         {
             return View(db.Product.ToList());
+        }
+        public ActionResult ProductsbyVendorId(string email)
+        {
+
+            if (email == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            int VendorId = (int)db.Vendor.Where(c => c.VendorEmail == email).Select(c => c.VendorId).FirstOrDefault();
+
+            IQueryable<Product> product = db.Product.Where(p => p.VendorId==VendorId);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product.ToList());
+        }
+        public ActionResult ProductsbyVendorId_Var(int id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            IQueryable<Product> product = db.Product.Where(p => p.VendorId == id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product.ToList());
+        }
+
+        public ActionResult UpdateOrderDetails(Product p)
+        {
+            Order order = new Order();
+            {
+                order.VendorId = p.VendorId;
+                order.ProductId = p.ProductId;
+                order.OrderStatus = "Pending";
+                order.OrderDate = Convert.ToDateTime(DateTime.Now);
+            };
+            TempData["orderDetails"] = order;
+            TempData["CurrentOrderProduct"] = p;
+            return RedirectToAction("Create", "Orders");
+
         }
 
         // GET: Products/Details/5
@@ -35,9 +81,19 @@ namespace OnlineClothStore.Controllers
             }
             return View(product);
         }
-
-        
-
+        public ActionResult DetailsName(string name)
+        {
+            if (name == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var product = db.Product.Where(p => p.ProductName.Contains(name));
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product.ToList());
+        }
         // GET: Products/Details/5 ( Search By CategoryName)
         public ActionResult DetailsCategory(string category)
         {
@@ -45,7 +101,7 @@ namespace OnlineClothStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var product = db.Product.Where(p => p.CategoryName == category);
+            var product = db.Product.Where(p => p.CategoryName.Contains(category));
             if (product == null)
             {
                 return HttpNotFound();
@@ -59,20 +115,27 @@ namespace OnlineClothStore.Controllers
             return View();
         }
 
-       
-
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,ProductName,VendorId,ProductQuantity,ProductPrice,ProductImage,CategoryName")] Product product)
+        public ActionResult Create(HttpPostedFileBase file, Product product)
         {
+            string VenEmail = Convert.ToString(Request["VendorEmail"].ToString());
+            product.VendorId = (int)db.Vendor.Where(v => v.VendorEmail == VenEmail).Select(c => c.VendorId).FirstOrDefault();
+            string filename = Path.GetFileName(file.FileName);
+            string _filenameWtDate = DateTime.Now.ToString("yymmssfff") + filename;
+            string extention = Path.GetExtension(file.FileName);
+            string path = Path.Combine(Server.MapPath("~/ProductImages/"), _filenameWtDate);
+
+            product.ProductImage = "~/ProductImages/" + _filenameWtDate;
             if (ModelState.IsValid)
             {
+                file.SaveAs(path);
                 db.Product.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ProductsbyVendorId_Var", new { id = product.VendorId });
             }
 
             return View(product);
@@ -104,7 +167,6 @@ namespace OnlineClothStore.Controllers
             {
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
             return View(product);
         }
@@ -130,9 +192,11 @@ namespace OnlineClothStore.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Product.Find(id);
+            int vendorId = product.VendorId;
             db.Product.Remove(product);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ProductsbyVendorId_Var", new { id = vendorId });
+   
         }
 
         protected override void Dispose(bool disposing)

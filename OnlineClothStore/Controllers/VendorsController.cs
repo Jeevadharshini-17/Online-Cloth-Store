@@ -23,13 +23,13 @@ namespace OnlineClothStore.Controllers
         }
 
         // GET: Vendors/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string email)
         {
-            if (id == null)
+            if (email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vendor vendor = db.Vendor.Find(id);
+            Vendor vendor = (Vendor)db.Vendor.SingleOrDefault(c => c.VendorEmail == email);
             if (vendor == null)
             {
                 return HttpNotFound();
@@ -61,10 +61,10 @@ namespace OnlineClothStore.Controllers
                     manager.Create(user, vendor.VendorPassword);
                 }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("VendorLogin", "Account");
             }
 
-                return View(vendor);
+            return View(vendor);
         }
 
         // GET: Vendors/Edit/5
@@ -93,7 +93,7 @@ namespace OnlineClothStore.Controllers
             {
                 db.Entry(vendor).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("VendorDashboard");
             }
             return View(vendor);
         }
@@ -122,6 +122,10 @@ namespace OnlineClothStore.Controllers
             db.Vendor.Remove(vendor);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult VendorDashboard()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)
