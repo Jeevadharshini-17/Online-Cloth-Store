@@ -1,0 +1,64 @@
+﻿@model OnlineClothStore.Models.Vendor
+
+@{
+    ViewBag.Title = "Details";
+}
+<h2>Hey @Model.VendorName</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorName)
+        </dd>
+        <br />
+        <dt>
+            Password
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorPassword)
+        </dd>
+        <br />
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorEmail)
+        </dd>
+        <br />
+        <dt>
+            Mobile Number
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorPhone)
+        </dd>
+        <br />
+        <dt>
+            Address
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorAddress)
+        </dd>
+        <br />
+        <dt>
+            Wallet Balance
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VWalletBalance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit Profile", "Edit", new { id = Model.VendorId })
+    <span> | </span>
+    @Html.ActionLink("Back to Dashboard", "VendorDashboard")
+</p>

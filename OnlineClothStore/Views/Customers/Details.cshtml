@@ -1,0 +1,67 @@
+﻿@model OnlineClothStore.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 id="signtitle">Hey @Model.CustomerName</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+        <br />
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerEmail)
+        </dd>
+        <br />
+        <dt>
+            Password
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerPassword)
+        </dd>
+        <br />
+        <dt>
+            Address
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerAddress)
+        </dd>
+        <br />
+        <dt>
+           Mobile Number
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerPhone)
+        </dd>
+        <br>
+        <dt>
+            Wallet Balance
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerWalletBalance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Edit Profile", "Edit", new { id = Model.CustomerId })
+    <span> | </span>
+    @Html.ActionLink("Back to Dashboard", "CustomerDashboard")
+</p>
