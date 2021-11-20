@@ -149,6 +149,7 @@ namespace OnlineClothStore.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Product.Find(id);
+            TempData["ProductImagePath"] = product.ProductImage;
             if (product == null)
             {
                 return HttpNotFound();
@@ -157,20 +158,36 @@ namespace OnlineClothStore.Controllers
         }
 
         // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,VendorId,ProductQuantity,ProductPrice,ProductImage,CategoryName")] Product product)
+        public ActionResult Edit(HttpPostedFileBase file, [Bind(Include = "ProductId,ProductName,VendorId,ProductQuantity,ProductPrice,ProductImage,CategoryName")] Product product)
         {
+            if (file != null)
+            {
+                string filename = Path.GetFileName(file.FileName);
+                string _filenameWtDate = DateTime.Now.ToString("yymmssfff") + filename;
+                string extention = Path.GetExtension(file.FileName);
+                string path = Path.Combine(Server.MapPath("~/ProductImages/"), _filenameWtDate);
+
+                product.ProductImage = "~/ProductImages/" + _filenameWtDate;
+                file.SaveAs(path);
+
+            }
+            else
+            {
+                product.ProductImage = (string)TempData["ProductImagePath"];
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
+                return RedirectToAction("ProductsbyVendorId_Var", new { id = product.VendorId });
+
             }
             return View(product);
         }
-
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {

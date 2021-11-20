@@ -3,11 +3,13 @@
 @{
     ViewBag.Title = "ProductsbyVendorId";
 }
-
+<br /><br />
 <h2 id="signtitle">Your Products</h2>
 
 <p>
     @Html.ActionLink("Create New Product", "Create")
+    <span> | </span>
+    @Html.ActionLink("Back to Dashboard", "VendorDashboard", "Vendors")
 </p>
 <table class="table">
     <tr>

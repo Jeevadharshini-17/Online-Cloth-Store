@@ -3,7 +3,9 @@
 @{
     ViewBag.Title = "OrdersByVendorId";
 }
-<br /><br /><br />
+<br />
+<br />
+<br />
 <h4 id="signtitle">Your Orders</h4>
 <table class="table">
     <tr>
@@ -28,27 +30,31 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductQuantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderTotal)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderTotal)
+            </td>
+        </tr>
+    }
 
 </table>
+<p>
+@Html.ActionLink("Back to Dashboard", "VendorDashboard", "Vendors")
+    </p>

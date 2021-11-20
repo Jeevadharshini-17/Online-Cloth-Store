@@ -75,11 +75,12 @@
                 </div>
             </div>*@
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Place Order" onclick="check()" class="btn btn-success" />
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Place Order" class="btn btn-success" />
         </div>
+        <p>@ViewData["BalanceError"]</p>
+    </div>
         <script type="text/javascript">
             function check() {
                 alert("Order Placed Successfully!");

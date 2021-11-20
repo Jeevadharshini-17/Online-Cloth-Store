@@ -118,6 +118,7 @@ namespace OnlineClothStore.Controllers
         {
             string CusEmail=Convert.ToString(Request["CustomerEmail"].ToString());
             order.CustomerId = (int)db.Customer.Where(c => c.CustomerEmail == CusEmail).Select(c => c.CustomerId).FirstOrDefault();
+            float CusWallet=(float)db.Customer.Where(c => c.CustomerEmail == CusEmail).Select(c => c.CustomerWalletBalance).FirstOrDefault();
             Product product = TempData["currentOrderProduct"] as Product;
             Order storedOrder = TempData["ToPassOrderDetails"] as Order;
             order.OrderStatus = storedOrder.OrderStatus;
@@ -125,6 +126,10 @@ namespace OnlineClothStore.Controllers
             order.OrderDate = storedOrder.OrderDate;
             order.VendorId = storedOrder.VendorId;
             order.OrderTotal = order.ProductQuantity * product.ProductPrice;
+            if (order.OrderTotal > CusWallet)
+            {
+                ModelState.AddModelError("","Insufficient Balance.Please Recharge your wallet.");
+            }
             if (ModelState.IsValid)
             {
                 db.Order.Add(order);
